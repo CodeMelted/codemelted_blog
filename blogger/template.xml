@@ -4233,8 +4233,7 @@ margin-left:40px
       });
 
       document.getElementById(&quot;btnWeb&quot;).addEventListener(&quot;click&quot;, () =&gt; {
-        window.alert(`Will popup into portal - ${PORTAL_PAGE}?iframe=${href}`);
-        // window.location.href = `${PORTAL_PAGE}?iframe=${href}`;
+        window.location.href = `${PORTAL_PAGE}?iframe=${href}`;
       });
 
       document.getElementById(&quot;btnSupport&quot;).addEventListener(&quot;click&quot;, () =&gt; {
