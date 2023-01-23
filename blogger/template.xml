@@ -3977,6 +3977,7 @@ margin-left:40px
     <div class='cm-fixed-footer' id='divFixedFooter'>
         <button id='btnGithub'><img src='https://codemelted.dev/gh-page-nav/icons/github-icon.png' style='height: 25px;'/><br/>Github</button>
         <button id='btnInstagram'><img src='https://codemelted.dev/gh-page-nav/icons/instagram-icon.png' style='height: 25px;'/><br/>Instagram</button>
+        <button id='btnPodcast'><img src='https://codemelted.dev/gh-page-nav/icons/icons8-podcast-48.png' style='height: 25px;'/><br/>Podcast</button>
         <button id='btnTwitter'><img src='https://codemelted.dev/gh-page-nav/icons/twitter-icon.png' style='height: 25px;'/><br/>Twitter</button>
         <button id='btnYouTube'><img src='https://codemelted.dev/gh-page-nav/icons/youtube-icon.png' style='height: 25px;'/><br/>YouTube</button>
     </div>
@@ -4066,7 +4067,7 @@ margin-left:40px
           padding-bottom: 5px;
           z-index: 2147483648;
           display: grid;
-          grid-template-columns: auto auto auto auto;
+          grid-template-columns: auto auto auto auto auto;
           position: fixed;
           bottom: 0;
           left: 0;
@@ -4131,6 +4132,7 @@ margin-left:40px
       const URL_PAGE = {
         &quot;Github&quot;    : `${HOME_PAGE}/p/github.html`,
         &quot;Instagram&quot; : `${HOME_PAGE}/p/instagram.html`,
+        &quot;Podcast&quot;   : `${HOME_PAGE}/p/podcast.html`,
         &quot;Twitter&quot;   : `${HOME_PAGE}/p/twitter.html`,
         &quot;YouTube&quot;   : `${HOME_PAGE}/p/youtube.html`,
       };
