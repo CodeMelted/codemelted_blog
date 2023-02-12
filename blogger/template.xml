@@ -2885,7 +2885,7 @@ margin-left:40px
                       </div>
                     </button>
                     <b:section id='search_top' name='Search (Top)' showaddelement='false'>
-                      <b:widget id='BlogSearch1' locked='true' title='Search This Blog' type='BlogSearch' visible='true'>
+                      <b:widget id='BlogSearch1' locked='true' title='Search This Blog' type='BlogSearch' visible='false'>
                         <b:includable id='main'>
   <b:include name='widget-title'/>
   <b:include name='content'/>
@@ -3969,14 +3969,8 @@ margin-left:40px
 
     <b:template-script async='true' name='strm' version='1.0.0'/>
 
-    <div class='cm-fixed-header' id='divFixedHeader'>
-        <img alt='logo' class='cm-logo' id='imgLogo' src='https://codemelted.dev/gh-page-nav/logos/logo-593x100.png'/>
-        <button id='btnWeb'><img src='https://codemelted.dev/gh-page-nav/icons/icons8-website-48.png' style='height: 35px;'/></button>
-    </div>
-
     <div class='cm-fixed-footer' id='divFixedFooter'>
         <button id='btnGithub'><img src='https://codemelted.dev/gh-page-nav/icons/github-icon.png' style='height: 25px;'/><br/>Github</button>
-        <button id='btnInstagram'><img src='https://codemelted.dev/gh-page-nav/icons/instagram-icon.png' style='height: 25px;'/><br/>Instagram</button>
         <button id='btnPodcast'><img src='https://codemelted.dev/gh-page-nav/icons/icons8-podcast-48.png' style='height: 25px;'/><br/>Podcast</button>
         <button id='btnTwitter'><img src='https://codemelted.dev/gh-page-nav/icons/twitter-icon.png' style='height: 25px;'/><br/>Twitter</button>
         <button id='btnYouTube'><img src='https://codemelted.dev/gh-page-nav/icons/youtube-icon.png' style='height: 25px;'/><br/>YouTube</button>
@@ -4067,7 +4061,7 @@ margin-left:40px
           padding-bottom: 5px;
           z-index: 2147483648;
           display: grid;
-          grid-template-columns: auto auto auto auto auto;
+          grid-template-columns: auto auto auto auto;
           position: fixed;
           bottom: 0;
           left: 0;
@@ -4109,6 +4103,10 @@ margin-left:40px
         color: #757575;
       }
 
+      h1, h2, h3, h4, h5, h6 {
+        color: #b5e853;
+      }
+
       /* Handle nice printing on the page */
       @media print {
         .cm-fixed-header {
@@ -4131,7 +4129,6 @@ margin-left:40px
       const PORTAL_PAGE = &quot;https://codemelted.com&quot;;
       const URL_PAGE = {
         &quot;Github&quot;    : `${HOME_PAGE}/p/github.html`,
-        &quot;Instagram&quot; : `${HOME_PAGE}/p/instagram.html`,
         &quot;Podcast&quot;   : `${HOME_PAGE}/p/podcast.html`,
         &quot;Twitter&quot;   : `${HOME_PAGE}/p/twitter.html`,
         &quot;YouTube&quot;   : `${HOME_PAGE}/p/youtube.html`,
@@ -4210,11 +4207,12 @@ margin-left:40px
           ? urlParams.get(&quot;action&quot;)
           : undefined;
 
-      // Setup whether our header is displayed
+      // Determine if we have been properly embedded
       if (isEmbedded) {
-          document.getElementById(&quot;divFixedHeader&quot;).style.display = &quot;none&quot;;
-          document.getElementsByClassName(&quot;search&quot;)[0].style.display = &quot;none&quot;;
           document.body.style.marginTop = &quot;0px&quot;;
+      } else {
+        // We were not, go render us into the portal page
+        window.location.href = `${PORTAL_PAGE}?iframe=${href}`;
       }
 
       // Hide the actions if a popup action is occurring.
@@ -4227,16 +4225,6 @@ margin-left:40px
         document.getElementsByClassName(&quot;cm-page-options&quot;)[0]
             .style.display = &quot;none&quot;;
       }
-
-      // Now assign our button actions, states from above will affect
-      // how some of those action are performed.
-      document.getElementById(&quot;imgLogo&quot;).addEventListener(&quot;click&quot;, () =&gt; {
-        window.location.href = HOME_PAGE;
-      });
-
-      document.getElementById(&quot;btnWeb&quot;).addEventListener(&quot;click&quot;, () =&gt; {
-        window.location.href = `${PORTAL_PAGE}?iframe=${href}`;
-      });
 
       document.getElementById(&quot;btnSupport&quot;).addEventListener(&quot;click&quot;, () =&gt; {
         popupWindow(&quot;https://www.buymeacoffee.com/codemelted&quot;,
