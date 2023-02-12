@@ -4126,7 +4126,7 @@ margin-left:40px
 
     <script>
       const HOME_PAGE = &quot;https://www.codemelted.blog&quot;;
-      const PORTAL_PAGE = &quot;https://codemelted.com&quot;;
+      const PORTAL_PAGE = &quot;https://codemelted.com/#/&quot;;
       const URL_PAGE = {
         &quot;Github&quot;    : `${HOME_PAGE}/p/github.html`,
         &quot;Podcast&quot;   : `${HOME_PAGE}/p/podcast.html`,
