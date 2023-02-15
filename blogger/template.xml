@@ -2934,9 +2934,9 @@ margin-left:40px
       <b:include cond='data:imagePlacement != &quot;REPLACE&quot;' name='description'/>
     </div>
     <div class='cm-page-options'>
-      <button id='btnSupport'><img src='https://codemelted.dev/gh-page-nav/icons/bmc-button.png'/></button>
-      <button id='btnPrint'><img src='https://codemelted.dev/gh-page-nav/icons/icons8-print-96.png'/></button>
-      <button id='btnRss'><img src='https://codemelted.dev/gh-page-nav/icons/icons8-rss-96.png'/></button>
+      <button id='btnSupport'><img src='https://codemelted.dev/website-nav/icons/bmc-button.png'/></button>
+      <button id='btnPrint'><img src='https://codemelted.dev/website-nav/icons/icons8-print-96.png'/></button>
+      <button id='btnRss'><img src='https://codemelted.dev/website-nav/icons/icons8-rss-96.png'/></button>
     </div>
     <b:include cond='data:imagePlacement == &quot;BEHIND&quot;' name='behindImageStyle'/>
   </b:includable>
@@ -3970,15 +3970,15 @@ margin-left:40px
     <b:template-script async='true' name='strm' version='1.0.0'/>
 
     <div class='cm-fixed-header' id='divFixedHeader'>
-        <img alt='logo' class='cm-logo' id='imgLogo' src='https://codemelted.dev/gh-page-nav/logos/logo-593x100.png'/>
-        <button id='btnWeb'><img src='https://codemelted.dev/gh-page-nav/icons/icons8-website-48.png' style='height: 35px;'/></button>
+        <img alt='logo' class='cm-logo' id='imgLogo' src='https://codemelted.dev/website-nav/logos/logo-593x100.png'/>
+        <button id='btnWeb'><img src='https://codemelted.dev/website-nav/icons/icons8-website-48.png' style='height: 35px;'/></button>
     </div>
 
     <div class='cm-fixed-footer' id='divFixedFooter'>
-        <button id='btnGithub'><img src='https://codemelted.dev/gh-page-nav/icons/github-icon.png' style='height: 25px;'/><br/>Github</button>
-        <button id='btnPodcast'><img src='https://codemelted.dev/gh-page-nav/icons/icons8-podcast-48.png' style='height: 25px;'/><br/>Podcast</button>
-        <button id='btnTwitter'><img src='https://codemelted.dev/gh-page-nav/icons/twitter-icon.png' style='height: 25px;'/><br/>Twitter</button>
-        <button id='btnYouTube'><img src='https://codemelted.dev/gh-page-nav/icons/youtube-icon.png' style='height: 25px;'/><br/>YouTube</button>
+        <button id='btnGithub'><img src='https://codemelted.dev/website-nav/icons/github-icon.png' style='height: 25px;'/><br/>Github</button>
+        <button id='btnPodcast'><img src='https://codemelted.dev/website-nav/icons/icons8-podcast-48.png' style='height: 25px;'/><br/>Podcast</button>
+        <button id='btnTwitter'><img src='https://codemelted.dev/website-nav/icons/twitter-icon.png' style='height: 25px;'/><br/>Twitter</button>
+        <button id='btnYouTube'><img src='https://codemelted.dev/website-nav/icons/youtube-icon.png' style='height: 25px;'/><br/>YouTube</button>
     </div>
 
     <style>
