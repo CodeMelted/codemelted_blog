@@ -2897,7 +2897,7 @@ margin-left:40px
 </b:includable>
                         <b:includable id='searchForm'>
   <form expr:action='data:blog.searchUrl'>
-    <b:attr cond='not data:view.isPreview' name='target' value='_top'/>
+    <b:attr cond='not data:view.isPreview' name='target' value='_self'/>
     <b:include name='urlParamsAsFormInput'/>
     <div class='search-input'>
       <input autocomplete='off' expr:aria-label='data:messages.searchThisBlog' expr:placeholder='data:messages.searchThisBlog' expr:value='data:view.isSearch ? data:view.search.query.escaped : &quot;&quot;' name='q'/>
@@ -3969,11 +3969,6 @@ margin-left:40px
 
     <b:template-script async='true' name='strm' version='1.0.0'/>
 
-    <div class='cm-fixed-header' id='divFixedHeader'>
-        <img alt='logo' class='cm-logo' id='imgLogo' src='https://codemelted.dev/website-nav/logos/logo-593x100.png'/>
-        <button id='btnWeb'><img src='https://codemelted.dev/website-nav/icons/icons8-website-48.png' style='height: 35px;'/></button>
-    </div>
-
     <div class='cm-fixed-footer' id='divFixedFooter'>
         <button id='btnGithub'><img src='https://codemelted.dev/website-nav/icons/github-icon.png' style='height: 25px;'/><br/>Github</button>
         <button id='btnPodcast'><img src='https://codemelted.dev/website-nav/icons/icons8-podcast-48.png' style='height: 25px;'/><br/>Podcast</button>
@@ -4001,42 +3996,7 @@ margin-left:40px
       }
 
       body {
-        margin-top: 55px;
         margin-bottom: 55px;
-      }
-
-      /* Header */
-      .cm-fixed-header {
-          display: grid;
-          grid-template-columns: 1fr auto auto;
-          border: 1px solid black;
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 55px;
-          background-color: black;
-          color: white;
-          font-family: sans-serif;
-          font-size: 12px;
-          z-index: 2147483648;
-      }
-      .cm-fixed-header button {
-          background-color: black;
-          color: white;
-          outline: none;
-          border: none;
-          cursor: pointer;
-          font-size: 12px;
-      }
-      .cm-logo {
-          display: block;
-          height: 35px;
-          margin-top: 12px;
-          margin-left: 23px;
-      }
-      .cm-logo:hover {
-          cursor: pointer;
       }
 
       /* Page Option Buttons */
@@ -4130,7 +4090,6 @@ margin-left:40px
     </style>
 
     <script>
-      document.title = &quot;Melt the Code - BLOG&quot;;
       const HOME_PAGE = &quot;https://www.codemelted.blog&quot;;
       const PORTAL_PAGE = &quot;https://codemelted.com&quot;;
       const URL_PAGE = {
@@ -4218,8 +4177,6 @@ margin-left:40px
         // If is it print, go prep the document for print.
         // Anything else is simply a web popup from our main page.
         if (popupAction === &quot;print&quot;) {
-          document.getElementById(&quot;divFixedHeader&quot;).style.display = &quot;none&quot;;
-          document.body.style.marginTop = &quot;0px&quot;;
           document.getElementById(&quot;divFixedFooter&quot;).style.display = &quot;none&quot;;
           document.body.style.marginBottom = &quot;0px&quot;;
           document.getElementsByClassName(&quot;cm-page-options&quot;)[0].style.display = &quot;none&quot;;
@@ -4232,23 +4189,6 @@ margin-left:40px
           }, 500);
         }
       } else {
-        // Hide some controls based on if we are embedded
-        if (isEmbedded) {
-            document.getElementById(&quot;divFixedHeader&quot;).style.display = &quot;none&quot;;
-            document.getElementsByClassName(&quot;search&quot;)[0].style.display = &quot;none&quot;;
-            document.body.style.marginTop = &quot;0px&quot;;
-        }
-
-        // Now assign our button actions, states from above will affect
-        // how some of those action are performed.
-        document.getElementById(&quot;imgLogo&quot;).addEventListener(&quot;click&quot;, () =&gt; {
-            window.location.href = HOME_PAGE;
-        });
-
-        document.getElementById(&quot;btnWeb&quot;).addEventListener(&quot;click&quot;, () =&gt; {
-            window.location.href = `${PORTAL_PAGE}?iframe=${href}`;
-        });
-
         document.getElementById(&quot;btnSupport&quot;).addEventListener(&quot;click&quot;, () =&gt; {
           popupWindow(&quot;https://www.buymeacoffee.com/codemelted&quot;,
               &quot;Buy Me a Coffee&quot;, 900, 600);
