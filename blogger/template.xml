@@ -4187,8 +4187,7 @@ margin-left:40px
       // view.
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
-      const embedSrc = urlParams.has(&quot;embedSrc&quot;) ? urlParams.get(&quot;embedSrc&quot;) : ""
-      const isEmbedded = embedSrc.length > 0;
+      const isEmbedded = urlParams.has(&quot;isEmbedded&quot;) ? urlParams.get(&quot;isEmbedded&quot;) === "true" : false;
 
       const popupAction = urlParams.has(&quot;action&quot;)
           ? urlParams.get(&quot;action&quot;)
@@ -4204,7 +4203,7 @@ margin-left:40px
           // Assign the button action
           btn.addEventListener(&quot;click&quot;, () =&gt; {
               window.location.href = isEmbedded
-                ? `${value}?embedSrc=${embedSrc}`
+                ? `${value}?isEmbedded=true`
                 : value;
           });
 
@@ -4244,13 +4243,11 @@ margin-left:40px
         // Hide some controls based on if we are embedded
         if (isEmbedded) {
             document.getElementById(&quot;divFixedHeader&quot;).style.display = &quot;none&quot;;
-            // If we are embedding on photos domain, hide the search.
-            if (embedSrc === "photos") {
-              document.getElementsByClassName(&quot;search&quot;)[0].style.display = &quot;none&quot;;
-            }
-            let returnLink = document.getElementsByClassName(&quot;return_link&quot;)[0];
-            if (returnLink) {
-              returnLink.href = `/?embedSrc=${embedSrc}`;
+            document.getElementsByClassName(&quot;search&quot;)[0].style.display = &quot;none&quot;;
+            var a = document.getElementsByTagName('a');
+            for (var idx= 0; idx &lt; a.length; ++idx){
+              let href = a[idx].href;
+              a[idx].href = `${href}?isEmbedded=true`;
             }
             document.body.style.marginTop = &quot;0px&quot;;
         }
