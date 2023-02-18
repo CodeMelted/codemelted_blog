@@ -2885,7 +2885,7 @@ margin-left:40px
                       </div>
                     </button>
                     <b:section id='search_top' name='Search (Top)' showaddelement='false'>
-                      <b:widget id='BlogSearch1' locked='true' title='Search This Blog' type='BlogSearch' visible='true'>
+                      <b:widget id='BlogSearch1' locked='true' title='Search This Blog' type='BlogSearch' version='2' visible='true'>
                         <b:includable id='main'>
   <b:include name='widget-title'/>
   <b:include name='content'/>
@@ -2917,26 +2917,36 @@ margin-left:40px
 
                 <div class='blog-name container'>
                   <b:section class='container' id='header' name='Header' showaddelement='false'>
+                    <b:widget id='HTML2' locked='false' title='' type='HTML' visible='true'>
+                      <b:widget-settings>
+                        <b:widget-setting name='content'>&lt;div class=&#39;cm-page-options&#39;&gt;
+      &lt;button id=&#39;btnSupport&#39;&gt;&lt;img src=&#39;https://codemelted.dev/website-nav/icons/bmc-button.png&#39;/&gt;&lt;/button&gt;
+      &lt;button id=&#39;btnPrint&#39;&gt;&lt;img src=&#39;https://codemelted.dev/website-nav/icons/icons8-print-96.png&#39;/&gt;&lt;/button&gt;
+      &lt;button id=&#39;btnRss&#39;&gt;&lt;img src=&#39;https://codemelted.dev/website-nav/icons/icons8-rss-96.png&#39;/&gt;&lt;/button&gt;
+    &lt;/div&gt;</b:widget-setting>
+                      </b:widget-settings>
+                      <b:includable id='main'>
+  <b:include name='widget-title'/>
+  <div class='widget-content'>
+    <data:content/>
+  </div>
+</b:includable>
+                    </b:widget>
                     <b:widget id='Header1' locked='true' title='Melt the Code - Blog (Header)' type='Header' version='2' visible='true'>
                       <b:widget-settings>
-                        <b:widget-setting name='displayUrl'>https://blogger.googleusercontent.com/img/a/AVvXsEiafkzQIir8TdI1WRK0AtolVWoikvarJAEEIPo_FxisoRF4HOfNK8s7CTDvyR32cvhCMGzaYffllB_kQSx6lIfSAw8gCu4-OOMLEGYWFAX46Ll_3iqPGVi5RZf2wwQ-IoPmYrTTKM8V0A0wcxtNSUxsmrduEr-YnW497amsGUMTvmFu9iu-5VoxHH9u=s593</b:widget-setting>
-                        <b:widget-setting name='displayHeight'>99</b:widget-setting>
+                        <b:widget-setting name='displayUrl'/>
+                        <b:widget-setting name='displayHeight'>0</b:widget-setting>
                         <b:widget-setting name='sectionWidth'>590</b:widget-setting>
-                        <b:widget-setting name='useImage'>true</b:widget-setting>
+                        <b:widget-setting name='useImage'>false</b:widget-setting>
                         <b:widget-setting name='shrinkToFit'>false</b:widget-setting>
-                        <b:widget-setting name='imagePlacement'>REPLACE</b:widget-setting>
-                        <b:widget-setting name='displayWidth'>593</b:widget-setting>
+                        <b:widget-setting name='imagePlacement'>BEHIND</b:widget-setting>
+                        <b:widget-setting name='displayWidth'>0</b:widget-setting>
                       </b:widget-settings>
                       <b:includable id='main' var='this'>
     <div class='header-widget'>
       <b:include cond='data:imagePlacement in {&quot;REPLACE&quot;, &quot;BEFORE_DESCRIPTION&quot;}' name='image'/>
       <b:include cond='data:imagePlacement not in {&quot;REPLACE&quot;, &quot;BEFORE_DESCRIPTION&quot;}' name='title'/>
       <b:include cond='data:imagePlacement != &quot;REPLACE&quot;' name='description'/>
-    </div>
-    <div class='cm-page-options'>
-      <button id='btnSupport'><img src='https://codemelted.dev/website-nav/icons/bmc-button.png'/></button>
-      <button id='btnPrint'><img src='https://codemelted.dev/website-nav/icons/icons8-print-96.png'/></button>
-      <button id='btnRss'><img src='https://codemelted.dev/website-nav/icons/icons8-rss-96.png'/></button>
     </div>
     <b:include cond='data:imagePlacement == &quot;BEHIND&quot;' name='behindImageStyle'/>
   </b:includable>
@@ -3969,6 +3979,11 @@ margin-left:40px
 
     <b:template-script async='true' name='strm' version='1.0.0'/>
 
+    <div class='cm-fixed-header' id='divFixedHeader'>
+        <img alt='logo' class='cm-logo' id='imgLogo' src='https://codemelted.dev/website-nav/logos/logo-593x100.png'/>
+        <button id='btnWeb'><img src='https://codemelted.dev/website-nav/icons/icons8-website-48.png' style='height: 35px;'/></button>
+    </div>
+
     <div class='cm-fixed-footer' id='divFixedFooter'>
         <button id='btnGithub'><img src='https://codemelted.dev/website-nav/icons/github-icon.png' style='height: 25px;'/><br/>Github</button>
         <button id='btnPodcast'><img src='https://codemelted.dev/website-nav/icons/icons8-podcast-48.png' style='height: 25px;'/><br/>Podcast</button>
@@ -3996,6 +4011,7 @@ margin-left:40px
       }
 
       body {
+        margin-top: 55px;
         margin-bottom: 55px;
       }
 
@@ -4016,6 +4032,40 @@ margin-left:40px
       }
       .cm-page-options img {
         height: 30px;
+      }
+
+      /* Header */
+      .cm-fixed-header {
+          display: grid;
+          grid-template-columns: 1fr auto auto;
+          border: 1px solid black;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 55px;
+          background-color: black;
+          color: white;
+          font-family: sans-serif;
+          font-size: 12px;
+          z-index: 2147483648;
+      }
+      .cm-fixed-header button {
+          background-color: black;
+          color: white;
+          outline: none;
+          border: none;
+          cursor: pointer;
+          font-size: 12px;
+      }
+      .cm-logo {
+          display: block;
+          height: 35px;
+          margin-top: 12px;
+          margin-left: 23px;
+      }
+      .cm-logo:hover {
+          cursor: pointer;
       }
 
       /* Footer */
@@ -4053,6 +4103,10 @@ margin-left:40px
       /* Blogger Overrides */
       .header-widget {
         text-align: center;
+      }
+
+      .Header h1, .Header h1 a, .Header h1 a:hover, .Header h1 a:visited, .Header p {
+        color: white;
       }
 
       .page_body {
@@ -4133,11 +4187,8 @@ margin-left:40px
       // view.
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
-      const isEmbedded = urlParams.has(&quot;isEmbedded&quot;)
-          ? urlParams.get(&quot;isEmbedded&quot;) === &quot;true&quot; ? true : false
-          : window.location !== window.parent.location
-              ? true
-              : false;
+      const embedSrc = urlParams.has(&quot;embedSrc&quot;) ? urlParams.get(&quot;embedSrc&quot;) : ""
+      const isEmbedded = embedSrc.length > 0;
 
       const popupAction = urlParams.has(&quot;action&quot;)
           ? urlParams.get(&quot;action&quot;)
@@ -4153,7 +4204,7 @@ margin-left:40px
           // Assign the button action
           btn.addEventListener(&quot;click&quot;, () =&gt; {
               window.location.href = isEmbedded
-                ? `${value}?isEmbedded=true`
+                ? `${value}?embedSrc=${embedSrc}`
                 : value;
           });
 
@@ -4177,9 +4228,10 @@ margin-left:40px
         // If is it print, go prep the document for print.
         // Anything else is simply a web popup from our main page.
         if (popupAction === &quot;print&quot;) {
+          document.getElementById(&quot;divFixedHeader&quot;).style.display = &quot;none&quot;;
+          document.body.style.marginTop = &quot;0px&quot;;
           document.getElementById(&quot;divFixedFooter&quot;).style.display = &quot;none&quot;;
           document.body.style.marginBottom = &quot;0px&quot;;
-          document.getElementsByClassName(&quot;cm-page-options&quot;)[0].style.display = &quot;none&quot;;
           document.getElementsByClassName(&quot;cm-page-options&quot;)[0].style.display = &quot;none&quot;;
           setTimeout(() =&gt; {
             window.print();
@@ -4189,6 +4241,30 @@ margin-left:40px
           }, 500);
         }
       } else {
+        // Hide some controls based on if we are embedded
+        if (isEmbedded) {
+            document.getElementById(&quot;divFixedHeader&quot;).style.display = &quot;none&quot;;
+            // If we are embedding on photos domain, hide the search.
+            if (embedSrc === "photos") {
+              document.getElementsByClassName(&quot;search&quot;)[0].style.display = &quot;none&quot;;
+            }
+            let returnLink = document.getElementsByClassName(&quot;return_link&quot;)[0];
+            if (returnLink) {
+              returnLink.href = `/?embedSrc=${embedSrc}`;
+            }
+            document.body.style.marginTop = &quot;0px&quot;;
+        }
+
+        // Now assign our button actions, states from above will affect
+        // how some of those action are performed.
+        document.getElementById(&quot;imgLogo&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+            window.location.href = HOME_PAGE;
+        });
+
+        document.getElementById(&quot;btnWeb&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+            window.location.href = `${PORTAL_PAGE}`;
+        });
+
         document.getElementById(&quot;btnSupport&quot;).addEventListener(&quot;click&quot;, () =&gt; {
           popupWindow(&quot;https://www.buymeacoffee.com/codemelted&quot;,
               &quot;Buy Me a Coffee&quot;, 900, 600);
