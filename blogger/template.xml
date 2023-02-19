@@ -4174,8 +4174,9 @@ margin-left:40px
       function popupWindow(url, windowName, w, h, action = undefined) {
         const top = (screen.height -  h) / 2;
         const left = (screen.width -  w) / 2;
+        const goUrl = action !== undefined ? `${url}?action=${action}` : url;
         window.open(
-          action !== undefined ? `${url}/?action=${action}` : url,
+          goUrl,
           windowName,
           `toolbar=no, location=no, directories=no, status=no, ` +
           `menubar=no, scrollbars=no, resizable=yes, copyhistory=no, ` +
@@ -4237,7 +4238,7 @@ margin-left:40px
             if (!isMobile()) {
               window.close();
             }
-          }, 500);
+          }, 750);
         }
       } else {
         // Hide some controls based on if we are embedded
