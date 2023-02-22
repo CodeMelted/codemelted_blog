@@ -4188,7 +4188,9 @@ margin-left:40px
       // view.
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
-      const isEmbedded = urlParams.has(&quot;isEmbedded&quot;) ? urlParams.get(&quot;isEmbedded&quot;) === "true" : false;
+      const isEmbedded = urlParams.has(&quot;isEmbedded&quot;)
+        ? parseInt(urlParams.get(&quot;isEmbedded&quot;))
+        : 0;
 
       const popupAction = urlParams.has(&quot;action&quot;)
           ? urlParams.get(&quot;action&quot;)
@@ -4203,8 +4205,8 @@ margin-left:40px
 
           // Assign the button action
           btn.addEventListener(&quot;click&quot;, () =&gt; {
-              window.location.href = isEmbedded
-                ? `${value}?isEmbedded=true`
+              window.location.href = isEmbedded &gt; 0
+                ? `${value}?isEmbedded=${isEmbedded}`
                 : value;
           });
 
@@ -4242,15 +4244,19 @@ margin-left:40px
         }
       } else {
         // Hide some controls based on if we are embedded
-        if (isEmbedded) {
+        if (isEmbedded &gt; 0) {
             document.getElementById(&quot;divFixedHeader&quot;).style.display = &quot;none&quot;;
             document.getElementsByClassName(&quot;search&quot;)[0].style.display = &quot;none&quot;;
             var a = document.getElementsByTagName('a');
             for (var idx= 0; idx &lt; a.length; ++idx){
               let href = a[idx].href;
-              a[idx].href = `${href}?isEmbedded=true`;
+              a[idx].href = `${href}?isEmbedded=${isEmbedded}`;
             }
             document.body.style.marginTop = &quot;0px&quot;;
+            if (isEmbedded === 2) {
+              document.getElementById(&quot;divFixedFooter&quot;).style.display = &quot;none&quot;;
+              document.body.style.marginBottom = &quot;0px&quot;;
+            }
         }
 
         // Now assign our button actions, states from above will affect
