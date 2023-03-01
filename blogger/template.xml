@@ -56,7 +56,7 @@
       default="#eee"  value="#f4f4f4"/>
   <Variable name="posts.background.color" description="Post background color"
       type="color"
-      default="#000000"  value="#000000"/>
+      default="#28231D"  value="#28231D"/>
   <Variable name="body.background.blur" description="Background blur"
       type="length"
       min="0px"
@@ -4079,15 +4079,15 @@ margin-left:40px
           bottom: 0;
           left: 0;
           width: 100%;
-          background-color: rgb(96, 125, 139);
+          background-color: rgb(225, 223, 219);
           color: white;
           text-align: center;
           font-size: 12px;
       }
 
       .cm-fixed-footer button {
-          background-color: rgb(96, 125, 139);
-          color: white;
+          background-color: rgb(225, 223, 219);
+          color: black;
           outline: none;
           border: none;
           cursor: pointer;
@@ -4096,8 +4096,8 @@ margin-left:40px
 
       .active, .cm-fixed-footer button:hover {
           font-weight: bold;
-          color: black;
-          background-color: rgb(189, 189, 189);
+          color: white;
+          background-color: black;
       }
 
       /* Blogger Overrides */
@@ -4127,6 +4127,10 @@ margin-left:40px
 
       h1, h2, h3, h4, h5, h6 {
         color: #b5e853;
+      }
+
+      .outer-container {
+        background-color: #28231D;
       }
 
       /* Handle nice printing on the page */
@@ -4212,8 +4216,8 @@ margin-left:40px
 
           // Determine and set the active tab if found
           if (href.toLowerCase().includes(key.toLowerCase())) {
-              btn.style.backgroundColor = &quot;rgb(189, 189, 189)&quot;;
-              btn.style.color = &quot;black&quot;;
+              btn.style.backgroundColor = &quot;rgb(0, 0, 0)&quot;;
+              btn.style.color = &quot;white&quot;;
               btn.style.fontWeight = &quot;bold&quot;;
               btn.classList.add(&quot;active&quot;);
           }
