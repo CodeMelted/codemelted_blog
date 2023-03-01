@@ -5,27 +5,27 @@ The following is the implementation notes for the [Melt the Code - Blog](https:/
 **Table of Contents**
 
 - [Melt the Code - Blog](#melt-the-code---blog)
-  - [Description](#description)
-  - [Design Notes](#design-notes)
-    - [UI Mockup](#ui-mockup)
-    - [The Hacked Theme (template.xml)](#the-hacked-theme-templatexml)
-      - [HTML / CSS](#html--css)
-      - [JavaScript](#javascript)
-    - [Widgets](#widgets)
-  - [Blog Maintenance](#blog-maintenance)
-    - [Archiving Articles](#archiving-articles)
-    - [Updating the Template](#updating-the-template)
-    - [Widgets](#widgets-1)
+  - [1.0 Description](#10-description)
+  - [2.0 Design Notes](#20-design-notes)
+    - [2.1 UI Mockup](#21-ui-mockup)
+    - [2.2 The Hacked Theme (template.xml)](#22-the-hacked-theme-templatexml)
+      - [2.2.1 HTML / CSS](#221-html--css)
+      - [2.2.2 JavaScript](#222-javascript)
+    - [2.3 Widgets](#23-widgets)
+  - [3.0 Blog Maintenance](#30-blog-maintenance)
+    - [3.1 Archiving Articles](#31-archiving-articles)
+    - [3.2 Updating the Template](#32-updating-the-template)
+    - [3.3 Widgets](#33-widgets)
 
-## Description
+## 1.0 Description
 
-**Who:** As a blog consumer
+**WHO:** As a blog consumer
 
-**What:** I want a dedicated blog site
+**WHAT:** I want a dedicated blog site
 
-**Why:** So that I may consume a blog that explores software engineer, STEM fields, amateur photography, the outdoors, and nerd culture while attempting to make sense of this world.
+**WHY:** So that I may consume a blog that explores software engineer, STEM fields, amateur photography, the outdoors, and nerd culture while attempting to make sense of this world.
 
-**Acceptance Criteria:**
+**ACCEPTANCE CRITERIA:**
 
 1. Fixed header appears always unless the site is embedded.
 2. When not embedded, the fixed header will
@@ -39,19 +39,19 @@ The following is the implementation notes for the [Melt the Code - Blog](https:/
    3. RSS Feed - An atom RSS feed for people to subscribe
 6. The chosen template will implement the same background color and similar foreground schema as the other `codemelted.*` domains.
 
-## Design Notes
+## 2.0 Design Notes
 
-### UI Mockup
+### 2.1 UI Mockup
 
 ![](blogger/design/images/ui-mockup.png)
 
 *- NOTE: This represents the overall domain theme regardless of the chosen blog technology.*
 
-### The Hacked Theme (template.xml)
+### 2.2 The Hacked Theme (template.xml)
 
 The chosen blogger template what the `Essential` theme.  It provided the desired layout.  Now in order to get the look you literally just need to hack the template.  The template was hacked and the sub-sections below added to get the desired look of the [UI Mockup](#ui-mockup).
 
-#### HTML / CSS
+#### 2.2.1 HTML / CSS
 
 The following represents the custom header / footer applied to the chosen template with additional CSS to style to meet the [UI Mockup](#ui-mockup) definition.
 
@@ -221,12 +221,12 @@ The following represents the custom header / footer applied to the chosen templa
     </style>
 ```
 
-#### JavaScript
+#### 2.2.2 JavaScript
 
 The following is the custom JavaScript added to the bottom of the template after the [HTML / CSS](#html--css) templated code.
 
 ```javascript
-   <script>
+    <script>
       const HOME_PAGE = &quot;https://www.codemelted.blog&quot;;
       const PORTAL_PAGE = &quot;https://codemelted.com&quot;;
       const URL_PAGE = {
@@ -271,7 +271,9 @@ The following is the custom JavaScript added to the bottom of the template after
       // view.
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
-      const isEmbedded = urlParams.has(&quot;isEmbedded&quot;) ? urlParams.get(&quot;isEmbedded&quot;) === "true" : false;
+      const isEmbedded = urlParams.has(&quot;isEmbedded&quot;)
+        ? parseInt(urlParams.get(&quot;isEmbedded&quot;))
+        : 0;
 
       const popupAction = urlParams.has(&quot;action&quot;)
           ? urlParams.get(&quot;action&quot;)
@@ -286,8 +288,8 @@ The following is the custom JavaScript added to the bottom of the template after
 
           // Assign the button action
           btn.addEventListener(&quot;click&quot;, () =&gt; {
-              window.location.href = isEmbedded
-                ? `${value}?isEmbedded=true`
+              window.location.href = isEmbedded &gt; 0
+                ? `${value}?isEmbedded=${isEmbedded}`
                 : value;
           });
 
@@ -325,15 +327,19 @@ The following is the custom JavaScript added to the bottom of the template after
         }
       } else {
         // Hide some controls based on if we are embedded
-        if (isEmbedded) {
+        if (isEmbedded &gt; 0) {
             document.getElementById(&quot;divFixedHeader&quot;).style.display = &quot;none&quot;;
             document.getElementsByClassName(&quot;search&quot;)[0].style.display = &quot;none&quot;;
             var a = document.getElementsByTagName('a');
             for (var idx= 0; idx &lt; a.length; ++idx){
               let href = a[idx].href;
-              a[idx].href = `${href}?isEmbedded=true`;
+              a[idx].href = `${href}?isEmbedded=${isEmbedded}`;
             }
             document.body.style.marginTop = &quot;0px&quot;;
+            if (isEmbedded === 2) {
+              document.getElementById(&quot;divFixedFooter&quot;).style.display = &quot;none&quot;;
+              document.body.style.marginBottom = &quot;0px&quot;;
+            }
         }
 
         // Now assign our button actions, states from above will affect
@@ -362,7 +368,7 @@ The following is the custom JavaScript added to the bottom of the template after
     </script>
 ```
 
-### Widgets
+### 2.3 Widgets
 
 This contains the widgets from social media feeds that are pages in the blogger interface.  Here is a breakdown of the widgets:
 
@@ -371,9 +377,9 @@ This contains the widgets from social media feeds that are pages in the blogger 
 - `youtube.html:` Custom built feed of my youtube playlists.
 - The GitHub page is handled via the [CodeMelted GitHub Repo](https://github.com/CodeMelted/CodeMelted) and is a copy and paste of that rendered page for blogger.
 
-## Blog Maintenance
+## 3.0 Blog Maintenance
 
-### Archiving Articles
+### 3.1 Archiving Articles
 
 Each month go and capture the articles for the [Melt the Code - Blog](https://www.codemelted.blog).
 
@@ -383,7 +389,7 @@ Each month go and capture the articles for the [Melt the Code - Blog](https://ww
 4. Repeat step 3 for all articles for the month
 5. Move the downloaded articles from the `Download` folder to the `blogger/articles/YYYY/MM` folder.  Create the `YYYY/MM` folder if it don't exist.
 
-### Updating the Template
+### 3.2 Updating the Template
 
 1. Make any necessary changes to the template.xml
 2. Navigate to [Blogger](https://www.blogger.com) to the blog
@@ -393,7 +399,7 @@ Each month go and capture the articles for the [Melt the Code - Blog](https://ww
 6. Navigate to the [Melt the Code - Blog](https://www.codemelted.blog) and ensure the desired affect.  Repeat steps 2 - 6 until completed
 7. Commit the changes the `template.xml` to GitHub.
 
-### Widgets
+### 3.3 Widgets
 
 You will need to do roughly the following if adding / updating a widget:
 1. Capture the widget in the `blogger/widgets` folder
