@@ -2896,7 +2896,7 @@ margin-left:40px
   </div>
 </b:includable>
                         <b:includable id='searchForm'>
-  <form expr:action='data:blog.searchUrl'>
+  <form expr:action='data:blog.searchUrl' id='bloggerSearch'>
     <b:attr cond='not data:view.isPreview' name='target' value='_self'/>
     <b:include name='urlParamsAsFormInput'/>
     <div class='search-input'>
@@ -2923,7 +2923,10 @@ margin-left:40px
       &lt;button id=&#39;btnSupport&#39;&gt;&lt;img src=&#39;https://codemelted.dev/website-nav/icons/bmc-button.png&#39;/&gt;&lt;/button&gt;
       &lt;button id=&#39;btnPrint&#39;&gt;&lt;img src=&#39;https://codemelted.dev/website-nav/icons/icons8-print-96.png&#39;/&gt;&lt;/button&gt;
       &lt;button id=&#39;btnRss&#39;&gt;&lt;img src=&#39;https://codemelted.dev/website-nav/icons/icons8-rss-96.png&#39;/&gt;&lt;/button&gt;
-    &lt;/div&gt;</b:widget-setting>
+    &lt;/div&gt;
+&lt;center&gt;
+A blog exploring software engineer, STEM fields, amateur photography, the outdoors, and nerd culture while attempting to make sense of this world.
+&lt;/center&gt;</b:widget-setting>
                       </b:widget-settings>
                       <b:includable id='main'>
   <b:include name='widget-title'/>
@@ -2932,7 +2935,7 @@ margin-left:40px
   </div>
 </b:includable>
                     </b:widget>
-                    <b:widget id='Header1' locked='true' title='Melt the Code - Blog (Header)' type='Header' version='2' visible='true'>
+                    <b:widget id='Header1' locked='true' title='Melt the Code Blog (Header)' type='Header' version='2' visible='false'>
                       <b:widget-settings>
                         <b:widget-setting name='displayUrl'/>
                         <b:widget-setting name='displayHeight'>0</b:widget-setting>
@@ -4188,6 +4191,10 @@ margin-left:40px
         );
       }
 
+      // Double check if this was a form submit for search so we can fix the isEmbedded and
+      // re-submit
+      let href = window.location.href;
+
       // Parse our URLSearchParams to determine how we are configuring this
       // view.
       const queryString = window.location.search;
@@ -4203,7 +4210,7 @@ margin-left:40px
       // Create the button actions to navigate to the appropriate page.
       // and set the if it is active or not depending on the page
       // navigated to.
-      let href = window.location.href;
+
       for (const [key, value] of Object.entries(URL_PAGE)) {
           let btn = document.getElementById(`btn${key}`);
 
@@ -4249,18 +4256,26 @@ margin-left:40px
       } else {
         // Hide some controls based on if we are embedded
         if (isEmbedded &gt; 0) {
-            document.getElementById(&quot;divFixedHeader&quot;).style.display = &quot;none&quot;;
-            document.getElementsByClassName(&quot;search&quot;)[0].style.display = &quot;none&quot;;
-            var a = document.getElementsByTagName('a');
-            for (var idx= 0; idx &lt; a.length; ++idx){
-              let href = a[idx].href;
-              a[idx].href = `${href}?isEmbedded=${isEmbedded}`;
-            }
-            document.body.style.marginTop = &quot;0px&quot;;
-            if (isEmbedded === 2) {
-              document.getElementById(&quot;divFixedFooter&quot;).style.display = &quot;none&quot;;
-              document.body.style.marginBottom = &quot;0px&quot;;
-            }
+          document.getElementById(&quot;divFixedHeader&quot;).style.display = &quot;none&quot;;
+          document.body.style.marginTop = &quot;0px&quot;;
+
+          var a = document.getElementsByTagName(&#39;a&#39;);
+          for (var idx= 0; idx &lt; a.length; ++idx){
+            let href = a[idx].href;
+            a[idx].href = `${href}?isEmbedded=${isEmbedded}`;
+          }
+
+          if (isEmbedded === 2) {
+            document.getElementById(&quot;divFixedFooter&quot;).style.display = &quot;none&quot;;
+            document.body.style.marginBottom = &quot;0px&quot;;
+          }
+
+          document.getElementById(&quot;bloggerSearch&quot;).addEventListener(&quot;submit&quot;, function(e) {
+            e.preventDefault(); // before the code
+            let searchTerm = document.getElementsByName(&quot;q&quot;)[0].value;
+            searchTerm = searchTerm.replaceAll(&quot; &quot;, &quot;+&quot;);
+            window.location.href = `https://codemelted.blog/search?q=${searchTerm}&amp;isEmbedded=${isEmbedded}`;
+          })
         }
 
         // Now assign our button actions, states from above will affect
